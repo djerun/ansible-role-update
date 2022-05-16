@@ -1,0 +1,5 @@
+---
+update_reboot: true
+update_pre_reboot_delay: 5
+update_post_reboot_delay: 5
+update_reboot_timeout: 600

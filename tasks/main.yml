@@ -1,0 +1,34 @@
+---
+- name: update arch keyring
+  community.general.pacman:
+    name:
+    - archlinux-keyring
+    state: latest
+    update_cache: yes
+  when: ansible_facts['os_family'] == "Archlinux"
+
+- name: update arch packages
+  community.general.pacman:
+    upgrade: yes
+  when: ansible_facts['os_family'] == "Archlinux"
+  notify:
+  - update.reboot
+
+- name: update debian packages
+  ansible.builtin.apt:
+    autoremove: yes
+    upgrade: yes
+    update_cache: yes
+  when: ansible_facts['os_family'] == "Debian"
+  notify:
+  - update.reboot
+
+- name: update dnf packages
+  ansible.builtin.dnf:
+    name:
+    - "*"
+    state: latest
+    update_cache: yes
+  when: ansible_facts['os_family'] == "Fedora"
+  notify:
+  - update.reboot

@@ -1,0 +1,7 @@
+---
+- name: update.reboot
+  reboot:
+    pre_reboot_delay: "{{ update_pre_reboot_delay | int }}"
+    post_reboot_delay: "{{ update_post_reboot_delay | int }}"
+    reboot_timeout: "{{ update_reboot_timeout | int }}"
+  when: update_reboot
